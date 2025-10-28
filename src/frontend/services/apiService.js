@@ -22,12 +22,13 @@ export default class apiClient {
     async post(endpoint, data) {
         try {
             const res = await this.client.post(`/${endpoint}`, data);
+            return res.data;
         } catch (error) {
             return { error: error.response?.data?.error || error.message };
         }
     }
 
-    async get(endpoint, data) {
+    async get(endpoint) {
         try {
             const res = await this.client.get(`/${endpoint}`);
             return res.data

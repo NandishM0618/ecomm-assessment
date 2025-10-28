@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser')
+
 const connectDatabase = require('./config/db');
 
 const app = express();
@@ -15,9 +17,15 @@ dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(
+    cors({
+        origin: "http://localhost:3000",
+        credentials: true,
+    })
+);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cookieParser())
 
 connectDatabase();
 
