@@ -6,11 +6,14 @@ const connectDatabase = require('./config/db');
 
 const app = express();
 
+const userRoutes = require('./routes/user');
+
 dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 connectDatabase();
@@ -18,6 +21,8 @@ connectDatabase();
 app.get('/', (req, res) => {
     res.send('Hello, World!');
 });
+
+app.use('/api/users', userRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
