@@ -33,11 +33,11 @@ export default function ProductPage() {
         try {
             const data = {
                 productId: product._id,
-                quantity,
+                qty: quantity,
             };
             const res = await api.post(`cart`, data);
 
-            if (res.success || res.status === 200) {
+            if (res.message === "Item added to cart" || res.cart) {
                 setAdded(true);
                 console.log(`✅ Added ${quantity} x ${product.name} to cart`);
                 setTimeout(() => setAdded(false), 2000);

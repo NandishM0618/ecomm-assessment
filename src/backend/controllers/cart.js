@@ -69,8 +69,12 @@ async function getCartItem(req, res) {
 
         const items = cart.items.map((item) => ({
             _id: item._id,
-            name: item.product.name,
-            price: item.product.price,
+            product: {
+                _id: item.product._id,
+                name: item.product.name,
+                price: item.product.price,
+                images: item.product.images || []
+            },
             qty: item.qty,
             subtotal: item.product.price * item.qty,
         }));
