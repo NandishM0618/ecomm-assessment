@@ -6,6 +6,10 @@ async function addToCart(req, res) {
         const userId = req.user._id;
         const { productId, qty } = req.body;
 
+        if (!productId || !qty) {
+            return res.status(400).json({ error: "Missing productId or qty" });
+        }
+
         const product = await Product.findById(productId);
         if (!product) return res.status(404).json({ message: "Product not found" });
 
@@ -30,7 +34,8 @@ async function addToCart(req, res) {
         console.error(err);
         res.status(500).json({ error: "Error adding to cart" });
     }
-};
+}
+
 
 
 async function deleteCartItem(req, res) {

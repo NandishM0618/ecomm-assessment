@@ -29,8 +29,7 @@ export default function Products() {
                 <div className="max-w-6xl mx-auto grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4">
                     {products && products.length > 0 ? (
                         products.map((product, index) => (
-                            <Link
-                                href="/"
+                            <div
                                 key={index}
                                 className="bg-white cursor-pointer rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
                             >
@@ -51,20 +50,17 @@ export default function Products() {
                                             <span className="text-lg font-bold text-green-600">
                                                 <span className='text-black/70'>Price:</span> ₹{product.price}
                                             </span>
-                                            <button
-                                                className="px-4 py-2 cursor-pointer bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg hover:from-blue-600 hover:to-indigo-700 active:scale-95 transition-all duration-200"
-                                                onClick={(e) => {
-                                                    e.preventDefault(); // prevent link navigation
-                                                    console.log(`Added ${product.name} to cart`);
-
-                                                }}
-                                            >
-                                                Add to Cart
-                                            </button>
+                                            <a href={`/product/${product._id}`}>
+                                                <button
+                                                    className="px-4 py-2 cursor-pointer bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg hover:from-blue-600 hover:to-indigo-700 active:scale-95 transition-all duration-200"
+                                                >
+                                                    Add to Cart
+                                                </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
-                            </Link>
+                            </div>
                         ))
                     ) : (
                         <p className="text-gray-500 text-lg col-span-full">No products found</p>
